@@ -1,0 +1,33 @@
+{
+  "accounts": {
+    "title": "Accounts Overview",
+    "add": "Add Account",
+    "edit": "Edit Account",
+    "filterPlaceholder": "Filter by username or description...",
+    "description": "User Description",
+    "username": "Username",
+    "password": "Password",
+    "status": "State",
+    "expiration": "Expiration Date",
+    "active": "Active Connections",
+    "max": "Max Connections",
+    "provider": "Provider",
+    "reseller": "Reseller",
+    "actions": "Actions",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this account?",
+    "loading": "Loading accounts..."
+  },
+  "providers": {
+    "title": "Providers Overview",
+    "add": "Add Provider",
+    "edit": "Edit Provider",
+    "name": "Name",
+    "domain": "Domain",
+    "port": "Port",
+    "actions": "Actions",
+    "delete": "Delete",
+    "confirmDelete": "Are you sure you want to delete this provider?",
+    "loading": "Loading providers..."
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "accounts": {
+    "title": "Accounts Übersicht",
+    "add": "Account hinzufügen",
+    "edit": "Account bearbeiten",
+    "filterPlaceholder": "Filtern nach Benutzername oder Beschreibung...",
+    "description": "Benutzerbeschreibung",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "status": "Status",
+    "expiration": "Ablaufdatum",
+    "active": "Aktive Verbindungen",
+    "max": "Maximale Verbindungen",
+    "provider": "Anbieter",
+    "reseller": "Reseller",
+    "actions": "Aktionen",
+    "delete": "Löschen",
+    "confirmDelete": "Wirklich diesen Account löschen?",
+    "loading": "Lade Accounts..."
+  },
+  "providers": {
+    "title": "Provider Übersicht",
+    "add": "Provider hinzufügen",
+    "edit": "Provider bearbeiten",
+    "name": "Name",
+    "domain": "Domain",
+    "port": "Port",
+    "actions": "Aktionen",
+    "delete": "Löschen",
+    "confirmDelete": "Wirklich diesen Provider löschen?",
+    "loading": "Lade Provider..."
+  }
+}
