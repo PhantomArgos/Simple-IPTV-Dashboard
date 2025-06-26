@@ -63,7 +63,7 @@ export default function NewAccount() {
       <input className="block border p-2 rounded w-full dark:bg-gray-700" placeholder="Reseller"
         value={form.reseller} onChange={e => setForm({ ...form, reseller: e.target.value })} />
 
-      <button className="bg-blue-600 text-white p-2 rounded w-full">{t("accounts.edit")}</button>
+      <button className="bg-blue-600 text-white p-2 rounded w-full">{t("accounts.add")}</button>
     </form>
   )
 }
