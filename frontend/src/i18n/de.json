@@ -18,6 +18,11 @@
     "confirmDelete": "Wirklich diesen Account löschen?",
     "loading": "Lade Accounts..."
   },
+  "login": {
+    "username": "Benutzername",
+    "password": "Passwort",
+    "submit": "Anmelden"
+  },
   "providers": {
     "title": "Provider Übersicht",
     "add": "Provider hinzufügen",
