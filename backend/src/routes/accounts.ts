@@ -1,7 +1,7 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 import { fetchAccountStatus } from "../utils/xtreamApi";
-import { encrypt } from '../utils/encryption'
+import { decrypt, encrypt } from '../utils/encryption'
 import { requireAuth } from "../middleware/requireAuth"
 
 const prisma = new PrismaClient();
@@ -12,6 +12,7 @@ router.get("/", requireAuth, async (req, res) => {
 
   const enriched = await Promise.all(accounts.map(async (account) => {
     const live = await fetchAccountStatus(account);
+    account.password = decrypt(account.password);
 
     if (live.expirationDate && account.expirationDate.getTime() !== live.expirationDate.getTime()) {
       await prisma.account.update({
@@ -37,6 +38,7 @@ router.get("/:id", requireAuth, async (req, res) => {
   try {
     const account = await prisma.account.findUnique({ where: { id } });
     if (account) {
+      account.password = decrypt(account.password)
       res.json(account);
     } else {
       res.status(404).json({ error: "Account nicht gefunden." });
