@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { fetchWithToast } from "../lib/fetchWithToast";
 import { Eye, EyeOff, Pencil, Trash2, ArrowDown, ArrowUp, Copy } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { decrypt } from "../utils/decrypt";
 
 export default function Accounts() {
   const { t } = useTranslation();
@@ -110,7 +109,6 @@ export default function Accounts() {
           </thead>
           <tbody>
             {sortedAccounts.map((acc: any) => {
-              const decryptedPassword = decrypt(acc.password);
               const domainUrl = `http://${acc.provider?.domain}:${acc.provider?.port}`;
               return (
                 <tr key={acc.id} className="hidden md:table-row">
@@ -127,14 +125,14 @@ export default function Accounts() {
                   </td>
                   <td className="px-4 py-2 border">
                     <div className="flex items-center gap-2">
-                      {visiblePasswords[acc.id] ? decryptedPassword : "••••••"}
+                      {visiblePasswords[acc.id] ? acc.password : "••••••"}
                       <button onClick={() =>
                         setVisiblePasswords((prev) => ({ ...prev, [acc.id]: !prev[acc.id] }))
                       }>
                         {visiblePasswords[acc.id] ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                       </button>
                       {visiblePasswords[acc.id] && (
-                        <button onClick={() => navigator.clipboard.writeText(decryptedPassword)}>
+                        <button onClick={() => navigator.clipboard.writeText(acc.password)}>
                           <Copy className="w-4 h-4" />
                         </button>
                       )}
@@ -154,7 +152,6 @@ export default function Accounts() {
 
             {/* Mobile Cards */}
             {sortedAccounts.map((acc: any) => {
-              const decryptedPassword = decrypt(acc.password);
               const domainUrl = `http://${acc.provider?.domain}:${acc.provider?.port}`;
               return (
                 <tr key={acc.id} className="md:hidden">
@@ -178,14 +175,14 @@ export default function Accounts() {
                       </div>
                       <div className="flex items-center gap-2">
                         <strong>{t("accounts.password")}:</strong>
-                        <span>{visiblePasswords[acc.id] ? decryptedPassword : "••••••"}</span>
+                        <span>{visiblePasswords[acc.id] ? acc.password : "••••••"}</span>
                         <button onClick={() =>
                           setVisiblePasswords((prev) => ({ ...prev, [acc.id]: !prev[acc.id] }))
                         }>
                           {visiblePasswords[acc.id] ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                         </button>
                         {visiblePasswords[acc.id] && (
-                          <button onClick={() => navigator.clipboard.writeText(decryptedPassword)}>
+                          <button onClick={() => navigator.clipboard.writeText(acc.password)}>
                             <Copy className="w-4 h-4" />
                           </button>
                         )}
