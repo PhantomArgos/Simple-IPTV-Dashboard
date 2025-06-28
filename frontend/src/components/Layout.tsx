@@ -1,6 +1,6 @@
-import ResponsiveNavbar from "./ResponsiveNavbar";
-import { Toaster } from "./Toaster";
-import { Outlet } from "react-router-dom";
+import ResponsiveNavbar from './ResponsiveNavbar'
+import { Toaster } from './Toaster'
+import { Outlet } from 'react-router-dom'
 
 export default function Layout() {
   return (
@@ -11,5 +11,5 @@ export default function Layout() {
         <Outlet />
       </div>
     </>
-  );
+  )
 }

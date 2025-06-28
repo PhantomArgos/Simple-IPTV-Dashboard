@@ -1,10 +1,10 @@
-import { Eye, EyeOff, Copy, Pencil, Trash2 } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Eye, EyeOff, Copy, Pencil, Trash2 } from 'lucide-react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function AccountRow({ account, onDelete }: any) {
-  const [show, setShow] = useState(false);
-  const domainUrl = `http://${account.provider?.domain}:${account.provider?.port}`;
+  const [show, setShow] = useState(false)
+  const domainUrl = `http://${account.provider?.domain}:${account.provider?.port}`
 
   return (
     <tr className="block md:table-row border-b md:border-none mb-4 md:mb-0">
@@ -32,18 +32,12 @@ export default function AccountRow({ account, onDelete }: any) {
       </td>
       <td className="block md:table-cell px-4 py-2">
         <span className="font-semibold md:hidden">Passwort: </span>
-        {show ? account.password : "••••••"}
-        <button onClick={() => setShow((v) => !v)} className="ml-1">
-          {show ? (
-            <Eye className="inline w-4 h-4" />
-          ) : (
-            <EyeOff className="inline w-4 h-4" />
-          )}
+        {show ? account.password : '••••••'}
+        <button onClick={() => setShow(v => !v)} className="ml-1">
+          {show ? <Eye className="inline w-4 h-4" /> : <EyeOff className="inline w-4 h-4" />}
         </button>
         {show && (
-          <button
-            onClick={() => navigator.clipboard.writeText(account.password)}
-          >
+          <button onClick={() => navigator.clipboard.writeText(account.password)}>
             <Copy className="inline w-4 h-4 ml-1" />
           </button>
         )}
@@ -73,5 +67,5 @@ export default function AccountRow({ account, onDelete }: any) {
         </button>
       </td>
     </tr>
-  );
+  )
 }
