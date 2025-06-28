@@ -15,7 +15,7 @@ export const DarkModeToggle = () => {
 
   return (
     <button
-      className="ml-auto px-2 py-1 border rounded text-black dark:text-white text-sm"
+      className="px-2 py-1 border rounded text-black dark:text-white text-sm"
       onClick={() => setDark(!dark)}
     >
       {dark ? "☀️ Hell" : "🌙 Dunkel"}
