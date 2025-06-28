@@ -11,7 +11,9 @@ export default function EditProvider() {
   const [form, setForm] = useState({ name: "", domain: "", port: 80 })
 
   useEffect(() => {
-    fetch(`http://localhost:3001/providers/${id}`)
+    fetch(`http://localhost:3001/providers/${id}`, {
+      credentials: "include",
+    })
       .then(res => res.json())
       .then(setForm)
   }, [id])
