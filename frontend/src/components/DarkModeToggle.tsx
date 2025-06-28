@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export const DarkModeToggle = () => {
   const [dark, setDark] = useState(() =>
-    document.documentElement.classList.contains("dark")
+    document.documentElement.classList.contains("dark"),
   );
 
   useEffect(() => {

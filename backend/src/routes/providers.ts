@@ -1,6 +1,6 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
-import { requireAuth } from "../middleware/requireAuth"
+import { requireAuth } from "../middleware/requireAuth";
 
 const prisma = new PrismaClient();
 const router = express.Router();
@@ -34,7 +34,7 @@ router.post("/", requireAuth, async (req, res) => {
   const { name, domain, port } = req.body;
   try {
     const provider = await prisma.provider.create({
-      data: { name, domain, port }
+      data: { name, domain, port },
     });
     res.status(201).json(provider);
   } catch (error) {
@@ -49,7 +49,7 @@ router.put("/:id", requireAuth, async (req, res) => {
   try {
     const provider = await prisma.provider.update({
       where: { id },
-      data: { name, domain, port }
+      data: { name, domain, port },
     });
     res.json(provider);
   } catch (error) {
@@ -65,8 +65,13 @@ router.delete("/:id", requireAuth, async (req, res) => {
     res.status(204).send();
   } catch (error: any) {
     console.error("DELETE /providers/:id", error);
-    if (error.code === 'P2003') {
-      res.status(409).json({ error: "Provider ist noch mit Accounts verknüpft und kann nicht gelöscht werden." });
+    if (error.code === "P2003") {
+      res
+        .status(409)
+        .json({
+          error:
+            "Provider ist noch mit Accounts verknüpft und kann nicht gelöscht werden.",
+        });
     } else {
       res.status(500).json({ error: "Fehler beim Löschen des Providers." });
     }

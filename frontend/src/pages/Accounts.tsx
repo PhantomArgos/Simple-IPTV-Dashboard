@@ -2,7 +2,15 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fetchWithToast } from "../lib/fetchWithToast";
-import { Eye, EyeOff, Pencil, Trash2, ArrowDown, ArrowUp, Copy } from "lucide-react";
+import {
+  Eye,
+  EyeOff,
+  Pencil,
+  Trash2,
+  ArrowDown,
+  ArrowUp,
+  Copy,
+} from "lucide-react";
 import { useTranslation } from "react-i18next";
 import AccountRow from "../components/AccountRow";
 
@@ -19,8 +27,8 @@ export default function Accounts() {
 
   useEffect(() => {
     fetch("http://localhost:3001/accounts", {
-    credentials: "include",
-  })
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => {
         setAccounts(data);
@@ -53,7 +61,8 @@ export default function Accounts() {
 
   const sortedAccounts = [...accounts]
     .filter((acc) => {
-      const domainUrl = `http://${acc.provider?.domain}:${acc.provider?.port}`.toLowerCase();
+      const domainUrl =
+        `http://${acc.provider?.domain}:${acc.provider?.port}`.toLowerCase();
       const query = filter.toLowerCase();
       return (
         acc.userDescription.toLowerCase().includes(query) ||
@@ -93,28 +102,27 @@ export default function Accounts() {
       />
 
       <div className="overflow-x-auto">
-<table className="w-full border dark:border-gray-700">
-  <thead className="hidden md:table-header-group">
-    <tr className="md:table-row">
-      <th className="px-4 py-2">Beschreibung</th>
-      <th className="px-4 py-2">Provider</th>
-      <th className="px-4 py-2">Domain</th>
-      <th className="px-4 py-2">User</th>
-      <th className="px-4 py-2">Passwort</th>
-      <th className="px-4 py-2">Status</th>
-      <th className="px-4 py-2">Ablauf</th>
-      <th className="px-4 py-2">Aktiv</th>
-      <th className="px-4 py-2">Max</th>
-      <th className="px-4 py-2">Aktionen</th>
-    </tr>
-  </thead>
-  <tbody>
-    {sortedAccounts.map((acc) => (
-      <AccountRow key={acc.id} account={acc} onDelete={handleDelete} />
-    ))}
-  </tbody>
-</table>
-
+        <table className="w-full border dark:border-gray-700">
+          <thead className="hidden md:table-header-group">
+            <tr className="md:table-row">
+              <th className="px-4 py-2">Beschreibung</th>
+              <th className="px-4 py-2">Provider</th>
+              <th className="px-4 py-2">Domain</th>
+              <th className="px-4 py-2">User</th>
+              <th className="px-4 py-2">Passwort</th>
+              <th className="px-4 py-2">Status</th>
+              <th className="px-4 py-2">Ablauf</th>
+              <th className="px-4 py-2">Aktiv</th>
+              <th className="px-4 py-2">Max</th>
+              <th className="px-4 py-2">Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedAccounts.map((acc) => (
+              <AccountRow key={acc.id} account={acc} onDelete={handleDelete} />
+            ))}
+          </tbody>
+        </table>
       </div>
     </motion.div>
   );

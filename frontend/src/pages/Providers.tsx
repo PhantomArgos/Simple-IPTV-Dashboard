@@ -45,7 +45,11 @@ export default function Providers() {
         </thead>
         <tbody>
           {providers.map((provider) => (
-            <ProviderRow key={provider.id} provider={provider} onDelete={handleDelete} />
+            <ProviderRow
+              key={provider.id}
+              provider={provider}
+              onDelete={handleDelete}
+            />
           ))}
         </tbody>
       </table>

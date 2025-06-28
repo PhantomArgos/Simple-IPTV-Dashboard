@@ -57,16 +57,28 @@ export default function ResponsiveNavbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex flex-wrap items-center gap-4 whitespace-nowrap mt-2 md:mt-0">
-          <Link to="/accounts" className="hover:underline flex items-center gap-1">
+          <Link
+            to="/accounts"
+            className="hover:underline flex items-center gap-1"
+          >
             <LayoutDashboard className="w-4 h-4" /> {t("accounts.title")}
           </Link>
-          <Link to="/accounts/new" className="hover:underline flex items-center gap-1">
+          <Link
+            to="/accounts/new"
+            className="hover:underline flex items-center gap-1"
+          >
             <UserPlus className="w-4 h-4" /> {t("accounts.add")}
           </Link>
-          <Link to="/providers" className="hover:underline flex items-center gap-1">
+          <Link
+            to="/providers"
+            className="hover:underline flex items-center gap-1"
+          >
             <Server className="w-4 h-4" /> {t("providers.title")}
           </Link>
-          <Link to="/providers/new" className="hover:underline flex items-center gap-1">
+          <Link
+            to="/providers/new"
+            className="hover:underline flex items-center gap-1"
+          >
             <UserPlus className="w-4 h-4" /> {t("providers.add")}
           </Link>
 
@@ -105,16 +117,28 @@ export default function ResponsiveNavbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <nav className="md:hidden bg-gray-100 dark:bg-gray-900 p-4 flex flex-col gap-4 border-t border-gray-300 dark:border-gray-700">
-          <Link to="/accounts" className="flex items-center gap-2 whitespace-nowrap">
+          <Link
+            to="/accounts"
+            className="flex items-center gap-2 whitespace-nowrap"
+          >
             <LayoutDashboard className="w-4 h-4" /> {t("accounts.title")}
           </Link>
-          <Link to="/accounts/new" className="flex items-center gap-2 whitespace-nowrap">
+          <Link
+            to="/accounts/new"
+            className="flex items-center gap-2 whitespace-nowrap"
+          >
             <UserPlus className="w-4 h-4" /> {t("accounts.add")}
           </Link>
-          <Link to="/providers" className="flex items-center gap-2 whitespace-nowrap">
+          <Link
+            to="/providers"
+            className="flex items-center gap-2 whitespace-nowrap"
+          >
             <Server className="w-4 h-4" /> {t("providers.title")}
           </Link>
-          <Link to="/providers/new" className="flex items-center gap-2 whitespace-nowrap">
+          <Link
+            to="/providers/new"
+            className="flex items-center gap-2 whitespace-nowrap"
+          >
             <UserPlus className="w-4 h-4" /> {t("providers.add")}
           </Link>
 
@@ -134,7 +158,7 @@ export default function ResponsiveNavbar() {
             </div>
 
             <div className="flex items-center gap-2 whitespace-nowrap">
-                <Lightbulb className="w-4 h-4" />
+              <Lightbulb className="w-4 h-4" />
               <DarkModeToggle />
             </div>
 

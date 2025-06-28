@@ -28,7 +28,7 @@ export default function EditAccount() {
           password: data.password,
           expirationDate: data.expirationDate.slice(0, 10),
           reseller: data.reseller || "",
-        })
+        }),
       );
   }, [id]);
 

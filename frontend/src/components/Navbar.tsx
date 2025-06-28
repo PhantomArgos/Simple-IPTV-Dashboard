@@ -48,16 +48,28 @@ export default function Navbar() {
 
       {/* Navigation */}
       <div className="flex flex-wrap gap-4 items-center justify-center text-sm md:text-base">
-        <Link to="/accounts" className="flex items-center gap-1 hover:underline">
+        <Link
+          to="/accounts"
+          className="flex items-center gap-1 hover:underline"
+        >
           <LayoutDashboard className="w-4 h-4" /> {t("accounts.title")}
         </Link>
-        <Link to="/accounts/new" className="flex items-center gap-1 hover:underline">
+        <Link
+          to="/accounts/new"
+          className="flex items-center gap-1 hover:underline"
+        >
           <UserPlus className="w-4 h-4" /> {t("accounts.add")}
         </Link>
-        <Link to="/providers" className="flex items-center gap-1 hover:underline">
+        <Link
+          to="/providers"
+          className="flex items-center gap-1 hover:underline"
+        >
           <Server className="w-4 h-4" /> {t("providers.title")}
         </Link>
-        <Link to="/providers/new" className="flex items-center gap-1 hover:underline">
+        <Link
+          to="/providers/new"
+          className="flex items-center gap-1 hover:underline"
+        >
           <UserPlus className="w-4 h-4" /> {t("providers.add")}
         </Link>
 

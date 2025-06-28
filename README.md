@@ -51,21 +51,25 @@ npm install
 ```
 
 - `.env` anlegen:
+
 ```env
 DATABASE_URL="postgresql://admin:admin@localhost:5432/iptv"
 ```
 
 - Migration ausführen:
+
 ```bash
 npx prisma migrate dev --name init
 ```
 
 - Backend starten:
+
 ```bash
 npm run dev
 ```
 
 API-Endpunkte:
+
 - `GET /providers`, `POST /providers`
 - `GET /accounts`, `POST /accounts`  
   → beim Laden von Accounts werden Ablaufdatum & aktive Verbindungen automatisch per API aktualisiert.
@@ -86,6 +90,7 @@ npx tailwindcss init -p
 ```
 
 - Frontend starten:
+
 ```bash
 npm run dev
 ```
@@ -103,6 +108,7 @@ http://{domain}:{port}/player_api.php?username={user}&password={pass}
 ```
 
 Benötigte Felder aus der Antwort:
+
 - `status`
 - `exp_date`
 - `active_cons`
