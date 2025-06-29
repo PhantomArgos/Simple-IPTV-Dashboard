@@ -6,6 +6,7 @@ import authRoutes from './routes/auth'
 import providersRouter from './routes/providers'
 import accountsRouter from './routes/accounts'
 import dotenv from 'dotenv'
+import path from 'path'
 
 dotenv.config()
 
@@ -38,9 +39,19 @@ app.use(
   })
 )
 
+// API-Routen
 app.use(authRoutes)
 app.use('/providers', providersRouter)
 app.use('/accounts', accountsRouter)
+
+// frontend
+const publicPath = path.resolve('public')
+app.use(express.static(publicPath))
+
+// spa fallback for react-router
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'))
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
