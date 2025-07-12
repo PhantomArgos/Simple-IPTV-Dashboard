@@ -62,7 +62,10 @@ services:
       NODE_ENV: production
       PORT: 3001
       SESSION_SECRET: your-session-secret
+      ENCRYPTION_SECRET: yourencryptionsecret
       DATABASE_URL: postgresql://admin:admin@db:5432/iptv
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: admin
     ports:
       - '3001:3001'
     restart: always
