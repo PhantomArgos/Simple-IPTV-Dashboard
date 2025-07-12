@@ -1,134 +1,195 @@
 # Simple IPTV Dashboard
 
-Ein Fullstack-Projekt zum Verwalten von IPTV-Accounts mit automatischer API-Abfrage für Ablaufdatum und aktive Verbindungen.
+A fullstack IPTV account management dashboard with automatic updates for account expiry and active connections using the Xtream Codes API.
 
-## 🔧 Stack
+> Built with modern tools like React, Express, Prisma, and PostgreSQL – packaged for Docker or local development.
 
-- **Frontend:** React + Vite + TailwindCSS
-- **Backend:** Express + Prisma (TypeScript)
-- **Datenbank:** PostgreSQL (Docker)
-- **API-Integration:** Xtream Codes API
+---
 
-## 📁 Struktur
+![Release](https://img.shields.io/github/v/release/PhantomArgos/Simple-IPTV-Dashboard?style=for-the-badge)
+![Build](https://img.shields.io/github/actions/workflow/status/PhantomArgos/Simple-IPTV-Dashboard/release.yml?label=build&style=for-the-badge)
+![GHCR](https://img.shields.io/badge/GHCR-simple--iptv--dashboard-blueviolet?style=for-the-badge&logo=docker)
+![License](https://img.shields.io/github/license/PhantomArgos/Simple-IPTV-Dashboard?style=for-the-badge)
+
+---
+
+## 🚀 Getting Started (Docker)
+
+You can run the app using either a standalone container or a full `docker-compose` setup.
+
+### 🔹 Option 1: Run with existing PostgreSQL
+
+> Assumes PostgreSQL is already running and reachable
+
+```bash
+docker run -e DATABASE_URL="postgresql://user:password@postgres:5432/iptv" \
+  -p 3001:3001 ghcr.io/phantomargos/simple-iptv-dashboard:latest
+```
+
+→ Now visit [http://localhost:3001](http://localhost:3001) in your browser.
+
+---
+
+### 🔹 Option 2: Use `docker-compose` (recommended)
+
+```yaml
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: iptv
+    volumes:
+      - /volume1/docker/simple-iptv-dashboard/data:/var/lib/postgresql/data:rw
+    ports:
+      - '5432:5432'
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8080:8080'
+
+  iptv-dashboard:
+    image: ghcr.io/phantomargos/simple-iptv-dashboard:latest
+    depends_on:
+      - db
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      SESSION_SECRET: your-session-secret
+      DATABASE_URL: postgresql://admin:admin@db:5432/iptv
+    ports:
+      - '3001:3001'
+    restart: always
+```
+
+Default credentials:
+
+- **PostgreSQL**: `admin / admin`
+- **Adminer**: [http://localhost:8080](http://localhost:8080), DB: `iptv`
+- **Dashboard UI**: [http://localhost:3001](http://localhost:3001)
+
+🗂️ Data will persist across restarts using a Docker volume.
+
+---
+
+## 🧑‍💻 Developer Setup
+
+### 🧱 Project Structure
 
 ```
-iptv-dashboard/
-├── backend/       → Express + Prisma API
-├── frontend/      → React Dashboard UI
+Simple-IPTV-Dashboard/
+├── backend/       → Express + Prisma (TypeScript)
+├── frontend/      → React + Vite + TailwindCSS
 ├── docker-compose.yml
 └── README.md
 ```
 
+### 📦 Requirements
+
+- Node.js ≥ 18
+- Docker (for database)
+- PostgreSQL locally **or** via Docker
+
 ---
 
-## 🚀 Setup
-
-### 1. Repository entpacken & öffnen
+### ▶️ 1. Start database via Docker
 
 ```bash
-unzip simple-iptv-dashboard.zip
-cd iptv-dashboard
+docker-compose up -d db
 ```
+
+Adminer will also be available at: [http://localhost:8080](http://localhost:8080)
 
 ---
 
-### 2. Datenbank starten (Docker)
-
-```bash
-docker-compose up -d
-```
-
-- PostgreSQL läuft auf `localhost:5432`
-- Adminer läuft auf `http://localhost:8080` (Login: `admin` / `admin`, DB: `iptv`)
-
----
-
-### 3. Backend aufsetzen
+### ▶️ 2. Start the backend
 
 ```bash
 cd backend
 npm install
 ```
 
-- `.env` anlegen:
+Create `.env` file:
 
 ```env
 DATABASE_URL="postgresql://admin:admin@localhost:5432/iptv"
+SESSION_SECRET="supersecret"
 ```
 
-- Migration ausführen:
+Run migrations:
 
 ```bash
 npx prisma migrate dev --name init
 ```
 
-- Backend starten:
+Start the server:
 
 ```bash
 npm run dev
 ```
 
-API-Endpunkte:
-
-- `GET /providers`, `POST /providers`
-- `GET /accounts`, `POST /accounts`  
-  → beim Laden von Accounts werden Ablaufdatum & aktive Verbindungen automatisch per API aktualisiert.
-
 ---
 
-### 4. Frontend aufsetzen
+### ▶️ 3. Start the frontend
 
 ```bash
 cd ../frontend
 npm install
-```
-
-Tailwind initialisieren (falls noch nicht geschehen):
-
-```bash
-npx tailwindcss init -p
-```
-
-- Frontend starten:
-
-```bash
 npm run dev
 ```
 
-Zugänglich unter: [http://localhost:5173](http://localhost:5173)
+App is now accessible at: [http://localhost:5173](http://localhost:5173)
 
 ---
 
-### 5. API für Xtream-Daten
+### 📡 Xtream Codes API
 
-Die API-Abfrage erfolgt automatisch über:
+The system automatically fetches account data from the Xtream API on each `/accounts` request:
 
-```http
-http://{domain}:{port}/player_api.php?username={user}&password={pass}
+```
+http://{host}:{port}/player_api.php?username={user}&password={pass}
 ```
 
-Benötigte Felder aus der Antwort:
+Extracted fields:
 
 - `status`
 - `exp_date`
 - `active_cons`
 - `max_connections`
 
-Diese werden bei jedem `GET /accounts` Request aktualisiert.
-
 ---
 
 ## ✅ Features
 
-- Übersicht aller Accounts inkl. Ablauf & Verbindungen
-- Formulare zum Anlegen von Providern und Accounts
-- Darkmode-fähiges UI mit Tailwind
+- Provider & account creation via web form
+- Automatic API sync for IPTV credentials
+- Responsive
+- REST API with session-based auth scaffold
+- Internationalization (i18n)
 
 ---
 
-## 🔮 ToDo / Erweiterungen
+## 📦 Release & CI/CD
 
-- Seiten-Routing
-- Darkmode Toggle
-- Authentifizierung
-- Mehr Details / Statistiken je Account
+- Releases are managed via [semantic-release](https://github.com/semantic-release/semantic-release)
+- Docker images are automatically published to GHCR on each release:
+  ```
+  ghcr.io/phantomargos/simple-iptv-dashboard:latest
+  ghcr.io/phantomargos/simple-iptv-dashboard:vX.Y.Z
+  ```
+
+---
+
+## 🛠️ License
+
+MIT – free to use, modify, and share.
+
+---
+
+_This project is not affiliated with or endorsed by Xtream Codes._
