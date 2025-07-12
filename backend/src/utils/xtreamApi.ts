@@ -5,7 +5,6 @@ export async function fetchAccountStatus(account: any) {
   const url = `http://${account.provider.domain}:${account.provider.port}/player_api.php?username=${account.user}&password=${decryptedPassword}`
 
   try {
-    console.log(url)
     const res = await fetch(url)
     const data = await res.json()
     const userInfo = data.user_info
